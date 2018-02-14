@@ -56,7 +56,7 @@ public class TicTacToe
             yIn = give.nextInt();
         }
         catch (InputMismatchException e){
-            System.out.println("Error: Only Numbers. Turn skipped :(");
+            System.out.println("Error: You didn't pick a number. Turn skipped");
         }
         try 
         {
