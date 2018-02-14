@@ -1,7 +1,7 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 import java.util.Random;
-
+//https://codereview.stackexchange.com/questions/79526/tic-tac-toe-getwinner-method-logic-for-a-grid-of-any-size-nxn
 public class TicTacToe
 {
     char[][] board = new char[3][3];
