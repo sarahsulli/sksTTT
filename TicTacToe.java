@@ -4,20 +4,70 @@ import java.util.Random;
 //https://codereview.stackexchange.com/questions/79526/tic-tac-toe-getwinner-method-logic-for-a-grid-of-any-size-nxn
 public class TicTacToe
 {
-    char[][] board = new char[3][3];
+    int n; 
+    Scanner prompt = new Scanner(System.in);
     Scanner give = new Scanner(System.in);
     Random rand = new Random();
+    
     int xIn; int yIn;
-
+    
+    public static char[][] board(int n)
+    {
+        char[][] board2 = new char[n][n];
+        return board2;
+    } 
+    
     public void display(){
-        for(int i = 0; i < board.length-2; i++){
+        for(int i = 0; i < board().length-2; i++){
             for(int j = 0; j < board[0].length; j++){
                 char one = board[i][j]; char two = board[i+1][j]; char three = board[i+2][j];
                 System.out.format("%3s%3s%3s%n", "["+one+"]", "["+two+"]", "["+three+"]");
             }
         }
     }
+    
+    public void game() {
+        System.out.println("How big do you want the game board (i recomend an odd number)");
+        System.out.println("-------->)");              
+        n = prompt.nextInt();  
+        board();
+        fillBlank();
+        display();
+        while(winCheck() == 'n' && isFull() == false) {
+            setUserInput(true);
+            display();
+            System.out.println("Computer turn");
+            setRandInput();
+            display();
+        }
+        if(winCheck() == 'n' && isFull() == true) {
+            System.out.println("Draw!");
+        }else if(winCheck() == 'X') {
+            System.out.println("X Wins!");
+        }else if(winCheck() == 'O') {
+            System.out.println("O Wins!");
+        }
+    }
 
+    public void computerPlays() {
+        fillBlank();
+        display();
+        while(winCheck() == 'n' && isFull() == false) {
+            System.out.println("Player 1: ");
+            setUserInput(true);
+            display();
+            System.out.println("Player 2: ");
+            setUserInput(false);
+            display();
+        }
+        if(winCheck() == 'n' && isFull() == true) {
+            System.out.println("Draw!");
+        }else if(winCheck() == 'X') {
+            System.out.println("X Wins!");
+        }else if(winCheck() == 'O') {
+            System.out.println("O Wins!");
+        }
+    }
     public void fillBlank(){
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[0].length; j++){
@@ -183,43 +233,6 @@ public class TicTacToe
         return 'n';
     }
 
-    public void game() {
-        fillBlank();
-        display();
-        while(winCheck() == 'n' && isFull() == false) {
-            setUserInput(true);
-            display();
-            System.out.println("Computer turn");
-            setRandInput();
-            display();
-        }
-        if(winCheck() == 'n' && isFull() == true) {
-            System.out.println("Draw!");
-        }else if(winCheck() == 'X') {
-            System.out.println("X Wins!");
-        }else if(winCheck() == 'O') {
-            System.out.println("O Wins!");
-        }
-    }
 
-    public void computerPlays() {
-        fillBlank();
-        display();
-        while(winCheck() == 'n' && isFull() == false) {
-            System.out.println("Player 1: ");
-            setUserInput(true);
-            display();
-            System.out.println("Player 2: ");
-            setUserInput(false);
-            display();
-        }
-        if(winCheck() == 'n' && isFull() == true) {
-            System.out.println("Draw!");
-        }else if(winCheck() == 'X') {
-            System.out.println("X Wins!");
-        }else if(winCheck() == 'O') {
-            System.out.println("O Wins!");
-        }
-    }
 
 }
