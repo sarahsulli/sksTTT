@@ -4,43 +4,33 @@ import java.util.Random;
 //https://codereview.stackexchange.com/questions/79526/tic-tac-toe-getwinner-method-logic-for-a-grid-of-any-size-nxn
 public class TicTacToe
 {
-    int n; 
-    Scanner prompt = new Scanner(System.in);
     Scanner give = new Scanner(System.in);
     Random rand = new Random();
-    
     int xIn; int yIn;
-    
-    public static char[][] board(int n)
-    {
-        char[][] board2 = new char[n][n];
-        return board2;
+
+    Scanner sizePrompt = new Scanner(System.in);    
+    int n; 
+    char[][]board; 
+
+    public void nSize(int n){
+        this.board = new char[n][n];
     } 
-    
-    public void display(){
-        for(int i = 0; i < board().length-2; i++){
-            for(int j = 0; j < board[0].length; j++){
-                char one = board[i][j]; char two = board[i+1][j]; char three = board[i+2][j];
-                System.out.format("%3s%3s%3s%n", "["+one+"]", "["+two+"]", "["+three+"]");
-            }
-        }
-    }
-    
+
     public void game() {
         System.out.println("How big do you want the game board (i recomend an odd number)");
-        System.out.println("-------->)");              
-        n = prompt.nextInt();  
-        board();
+        System.out.println("-------->");              
+        n = sizePrompt.nextInt();  
+        //System.out.println(n);
         fillBlank();
         display();
-        while(winCheck() == 'n' && isFull() == false) {
+        while(winCheck() == 'k' && isFull() == false) {
             setUserInput(true);
             display();
             System.out.println("Computer turn");
             setRandInput();
             display();
         }
-        if(winCheck() == 'n' && isFull() == true) {
+        if(winCheck() == 'k' && isFull() == true) {
             System.out.println("Draw!");
         }else if(winCheck() == 'X') {
             System.out.println("X Wins!");
@@ -50,9 +40,13 @@ public class TicTacToe
     }
 
     public void computerPlays() {
+        System.out.println("How big do you want the game board (i recomend an odd number)");
+        System.out.println("-------->");              
+        n = sizePrompt.nextInt();  
+        //System.out.println(n);
         fillBlank();
         display();
-        while(winCheck() == 'n' && isFull() == false) {
+        while(winCheck() == 'k' && isFull() == false) {
             System.out.println("Player 1: ");
             setUserInput(true);
             display();
@@ -60,18 +54,27 @@ public class TicTacToe
             setUserInput(false);
             display();
         }
-        if(winCheck() == 'n' && isFull() == true) {
+        if(winCheck() == 'k' && isFull() == true) {
             System.out.println("Draw!");
         }else if(winCheck() == 'X') {
             System.out.println("X Wins!");
         }else if(winCheck() == 'O') {
             System.out.println("O Wins!");
         }
-    }
+    }    
+
     public void fillBlank(){
         for(int i = 0; i < board.length; i++){
             for(int j = 0; j < board[0].length; j++){
                 board[i][j] = ' ';
+            }
+        } 
+    } 
+
+    public void display(){
+        for(int i =0; i < board.length; i++){
+            for(int j = 0; j < board[0].length; j++){
+                System.out.println("| |");
             }
         }
     }
@@ -130,8 +133,8 @@ public class TicTacToe
         boolean placed = false;
         while(placed == false && isFull() == false) 
         {
-            int randX = rand.nextInt(3);
-            int randY = rand.nextInt(3);
+            int randX = rand.nextInt(n);
+            int randY = rand.nextInt(n);
             if(board[randX][randY] == ' ') 
             {
                 placed = true;
@@ -230,9 +233,7 @@ public class TicTacToe
                 return 'O';
             }
         }
-        return 'n';
+        return 'k';
     }
-
-
 
 }

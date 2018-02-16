@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class GameMenu
 {
-    //public int n;
+
     public static void main(String args[]){
         TicTacToe toe = new TicTacToe();
         Scanner prompt = new Scanner(System.in);
